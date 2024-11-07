@@ -400,7 +400,7 @@
                 <summary style="font-weight: bold; font-size: 0.9em; color: #444;">
                   {d.Company} - ${d.PriceUsd.toFixed(2)}
                 </summary>
-                <div style="padding: 10px 0 0 15px; font-size: 0.8em; color: #555;">
+                <div style="cursor: auto; padding: 10px 0 0 15px; font-size: 0.8em; color: #555;">
                   <p style="margin: 5px 0;"><strong>Product:</strong> {d.Product}</p>
                   <p style="margin: 5px 0;"><strong>OS:</strong> {d.OpSys}</p>
                   <p style="margin: 5px 0;"><strong>RAM:</strong> {d.Ram} GB</p>
