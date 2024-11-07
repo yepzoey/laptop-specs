@@ -24,10 +24,13 @@
     export const selectedCompany = writable([]);
     export const selectedGPU = writable([]);
     export const selectedCPU = writable([]);
+    export const selectedScreenResolution = writable([]);
+
     const uniqueOpSys = [...new Set(data.map(d => d.OpSys))];
     const uniqueCompanies = [...new Set(data.map(d => d.Company))];
     const uniqueGPU = [...new Set(data.map(d => d.GPU_company))];
     const uniqueCPU = [...new Set(data.map(d => d.CPU_company))];
+    const uniqueScreenResolutions = [...new Set(data.map(d => `${d.ScreenW} x ${d.ScreenH}`))];
   
     const color = d3.scaleOrdinal()
       .domain([...new Set(data.map(d => d.Company))])
@@ -50,7 +53,8 @@
       ($selectedOpSys.length === 0 || $selectedOpSys.includes(d.OpSys)) &&
       ($selectedCompany.length === 0 || $selectedCompany.includes(d.Company)) &&
       ($selectedGPU.length === 0 || $selectedGPU.includes(d.GPU_company)) &&
-      ($selectedCPU.length === 0 || $selectedCPU.includes(d.CPU_company))
+      ($selectedCPU.length === 0 || $selectedCPU.includes(d.CPU_company)) &&
+      ($selectedScreenResolution.length === 0 || $selectedScreenResolution.includes(`${d.ScreenW} x ${d.ScreenH}`))
       );
     });
   
@@ -277,6 +281,7 @@
       selectedCompany.set([]);
       selectedGPU.set([]);
       selectedCPU.set([]);
+      selectedScreenResolution.set([]);
   
       // Clear all circles to their default style
       d3.select(svg)
@@ -341,6 +346,21 @@
         {/each}
       </div>
     </details>
+
+    <!-- Screen Resolution Filter Dropdown -->
+    <details style="flex: 1; max-width: 200px;">
+      <summary style="cursor: pointer; font-weight: bold;">
+        Screen Resolution
+      </summary>
+      <div style="margin-top: 10px; border: 1px solid #ddd; max-height: 150px; overflow-y: auto;">
+        {#each uniqueScreenResolutions as resolution}
+          <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 5px;">
+            <input style="cursor: pointer;" type="checkbox" bind:group={$selectedScreenResolution} value={resolution} />
+            {resolution}
+          </label>
+        {/each}
+      </div>
+    </details>
   
     <!-- GPU Filter Dropdown -->
     <details style="flex: 1; max-width: 200px;">
@@ -372,8 +392,7 @@
       </div>
     </details>
   </div>
-  
-  </div>
+</div>
   
   <div style="display: flex; align-items: flex-start;">
     <svg bind:this={svg} style="flex-grow: 1; width: 100%; height: auto; display: block; margin-top: 20px" preserveAspectRatio="xMidYMid meet"></svg>
@@ -403,8 +422,9 @@
                 <div style="cursor: auto; padding: 10px 0 0 15px; font-size: 0.8em; color: #555;">
                   <p style="margin: 5px 0;"><strong>Product:</strong> {d.Product}</p>
                   <p style="margin: 5px 0;"><strong>OS:</strong> {d.OpSys}</p>
-                  <p style="margin: 5px 0;"><strong>RAM:</strong> {d.Ram} GB</p>
                   <p style="margin: 5px 0;"><strong>Screen Size:</strong> {d.Inches}"</p>
+                  <p style="margin: 5px 0;"><strong>Resolution:</strong> {d.ScreenW} x {d.ScreenH}</p>
+                  <p style="margin: 5px 0;"><strong>RAM:</strong> {d.Ram} GB</p>
                   <p style="margin: 5px 0;"><strong>SSD:</strong> {d.SSD ? d.SSD + ' GB' : 'None'}</p>
                   <p style="margin: 5px 0;"><strong>HDD:</strong> {d.HDD ? d.HDD + ' GB' : 'None'}</p>
                   <p style="margin: 5px 0;"><strong>Flash Storage:</strong> {d.FlashStorage ? d.FlashStorage + ' GB' : 'None'}</p>

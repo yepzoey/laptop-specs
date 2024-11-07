@@ -5,6 +5,7 @@
 
   let data = [];
   const euroToUsdRate = 1.1;
+  let loading = true;
 
   onMount(async () => {
     try {
@@ -61,20 +62,25 @@
       console.log("Data loaded:", data.length);
     } catch (error) {
       console.error("Error loading data:", error);
+    } finally {
+      loading = false;
     }
   });
 </script>
 
 <main>
   <h1>Laptop Specifications</h1>
+  <p>
+    <a href="/laptop-specs/write-up" style="color: #007acc; text-decoration: underline;">Project Write-Up</a>
+  </p>
 
-  {#if data.length > 0}
-    <ScatterPlotMatrix {data} />
-  {:else}
+  {#if loading}
     <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
       <h3>Loading data...</h3>
       <img src="/laptop-specs/tangyload.gif" alt="Loading..." style="width: 100px; height: 100px;" />
     </div>
+  {:else}
+    <ScatterPlotMatrix {data} />
   {/if}
 </main>
 
