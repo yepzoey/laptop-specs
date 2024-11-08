@@ -32,10 +32,17 @@
     const uniqueCPU = [...new Set(data.map(d => d.CPU_company))];
     const uniqueScreenResolutions = [...new Set(data.map(d => `${d.ScreenW} x ${d.ScreenH}`))];
   
+    const tab20Colors = [
+      "#4e79a7", "#f28e2b", "#e15759", "#76b7b2", "#59a14f",
+      "#edc948", "#b07aa1", "#ff9da7", "#9c755f", "#bab0ac",
+      "#aec7e8", "#ffbb78", "#98df8a", "#ff9896", "#c5b0d5",
+      "#c49c94", "#f7b6d2", "#c7c7c7", "#dbdb8d", "#9edae5"
+    ];
+
     const color = d3.scaleOrdinal()
       .domain([...new Set(data.map(d => d.Company))])
-      .range(d3.schemeCategory10);
-  
+      .range(tab20Colors);
+
     const cellCombinations = d3.cross(d3.range(specs.length), d3.range(specs.length));
   
     const customLabels = {
@@ -307,7 +314,6 @@
   gap: 20px; 
   border-radius: 8px; 
   max-width: 100%;
-  margin-bottom: 20px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -336,7 +342,7 @@
 <div style="display: flex; gap: 10px; flex-wrap: wrap; white-space: nowrap; justify-content: center; align-items: flex-start; flex-grow: 1;">
   
   <!-- OS Filter Dropdown -->
-  <details style="flex: 1; min-width: 140px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
+  <details style="flex: 1; min-width: auto; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
     <summary style="cursor: pointer; font-weight: bold;">
       Operating System
     </summary>
@@ -351,7 +357,7 @@
   </details>
 
   <!-- Company Filter Dropdown -->
-  <details style="flex: 1; min-width: 140px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
+  <details style="flex: 1; min-width: auto; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
     <summary style="cursor: pointer; font-weight: bold;">
       Company
     </summary>
@@ -366,7 +372,7 @@
   </details>
 
   <!-- Screen Resolution Filter Dropdown -->
-  <details style="flex: 1; min-width: 140px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
+  <details style="flex: 1; min-width: auto; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
     <summary style="cursor: pointer; font-weight: bold;">
       Screen Resolution
     </summary>
@@ -381,7 +387,7 @@
   </details>
 
   <!-- GPU Filter Dropdown -->
-  <details style="flex: 1; min-width: 140px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
+  <details style="flex: 1; min-width: auto; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
     <summary style="cursor: pointer; font-weight: bold;">
       GPU Manufacturer
     </summary>
@@ -396,7 +402,7 @@
   </details>
 
   <!-- CPU Filter Dropdown -->
-  <details style="flex: 1; min-width: 140px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
+  <details style="flex: 1; min-width: auto; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
     <summary style="cursor: pointer; font-weight: bold;">
       CPU Manufacturer
     </summary>
@@ -411,27 +417,76 @@
   </details>
 </div>
 </div>
-  
+
 <div style="display: flex; align-items: flex-start;">
+  <!-- Scatter Plot SVG -->
   <svg 
     bind:this={svg} 
     style="flex-basis: 100%; height: auto; max-width: 100%; display: block; margin-top: 20px" 
     preserveAspectRatio="xMidYMid meet">
   </svg>
 
+  <!-- Side Panel Container -->
+  <div style="
+    width: auto;
+    margin-left: -5px;
+    margin-top: {cellOffsetTop}px;
+    font-family: Arial, sans-serif;
+  ">
+
+    <!-- Legend Box -->
     <div style="
-      width: 250px;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      font-size: 0.5em;
+      color: #444;
+    ">
+      <!-- Legend Title -->
+      <h3 style="font-size: 1em; margin: 0 0 10px 0; color: #333;">Company Legend</h3>
+      
+      <!-- Legend Items in Grid -->
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        gap: 5px 10px;
+      ">
+      {#each uniqueCompanies as company}
+        <div style="display: flex; align-items: center; margin-right: 10px; margin-bottom: 5px;">
+          <!-- Color Swatch -->
+          <span style="
+            width: 10px;
+            height: 10px;
+            background-color: {color(company)};
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+          "></span>
+          <!-- Company Name -->
+          <span>{company}</span>
+        </div>
+      {/each}
+    </div>
+  </div>
+
+    <!-- Selected Product Details Box -->
+    <div style="
       max-height: 400px;
-      overflow-y: auto;
-      padding: 15px;
-      margin-left: -5px;
-      margin-top: {cellOffsetTop}px;
+      padding: 10px;
+      border-radius: 8px;
       background-color: #f9f9f9;
       border: 1px solid #ddd;
-      border-radius: 8px;
-      font-family: Arial, sans-serif;
+      overflow-y: auto;
     ">
       <h3 style="font-size: 1em; margin-bottom: 10px; color: #333;">Selected Product Details</h3>
+      <div style="
+        padding: 10px;
+        max-height: 350px;
+        overflow-y: auto;
+        box-sizing: border-box;
+      ">
       {#if $selectedData.length > 0}
         <ul style="list-style-type: none; padding: 0; margin: 0;">
           {#each $selectedData.slice().sort((a, b) => b.PriceUsd - a.PriceUsd) as d, i}
@@ -462,7 +517,9 @@
       {/if}
     </div>
   </div>
-  
+</div>
+</div>
+
   <style>
     details summary {
       font-size: 1em;
