@@ -301,6 +301,7 @@
   
   <div style="
   display: flex; 
+  flex-direction: row;
   align-items: center; 
   padding: 10px 15px; 
   gap: 20px; 
@@ -332,10 +333,10 @@
   </div>
 
 <!-- Filter Options -->
-<div style="display: flex; gap: 10px; flex-wrap: wrap; white-space: nowrap; justify-content: center; align-items: top; flex-grow: 1;">
+<div style="display: flex; gap: 10px; flex-wrap: wrap; white-space: nowrap; justify-content: center; align-items: flex-start; flex-grow: 1;">
   
   <!-- OS Filter Dropdown -->
-  <details style="flex: 1;">
+  <details style="flex: 1; min-width: 140px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
     <summary style="cursor: pointer; font-weight: bold;">
       Operating System
     </summary>
@@ -350,7 +351,7 @@
   </details>
 
   <!-- Company Filter Dropdown -->
-  <details style="flex: 1;">
+  <details style="flex: 1; min-width: 140px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
     <summary style="cursor: pointer; font-weight: bold;">
       Company
     </summary>
@@ -365,7 +366,7 @@
   </details>
 
   <!-- Screen Resolution Filter Dropdown -->
-  <details style="flex: 1;">
+  <details style="flex: 1; min-width: 140px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
     <summary style="cursor: pointer; font-weight: bold;">
       Screen Resolution
     </summary>
@@ -380,7 +381,7 @@
   </details>
 
   <!-- GPU Filter Dropdown -->
-  <details style="flex: 1;">
+  <details style="flex: 1; min-width: 140px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
     <summary style="cursor: pointer; font-weight: bold;">
       GPU Manufacturer
     </summary>
@@ -395,7 +396,7 @@
   </details>
 
   <!-- CPU Filter Dropdown -->
-  <details style="flex: 1;">
+  <details style="flex: 1; min-width: 140px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; background-color: white;">
     <summary style="cursor: pointer; font-weight: bold;">
       CPU Manufacturer
     </summary>
@@ -410,7 +411,6 @@
   </details>
 </div>
 </div>
-
   
 <div style="display: flex; align-items: flex-start;">
   <svg 
