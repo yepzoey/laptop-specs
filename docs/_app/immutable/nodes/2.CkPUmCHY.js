@@ -35,6 +35,7 @@ import{a as lt,t as ut}from"../chunks/disclose-version.B4-XMPiO.js";import{h as 
         gap: 5px 10px;
       "></div></div> <div style="
       max-height: 400px;
+      width: auto;
       padding: 10px;
       border-radius: 8px;
       background-color: #f9f9f9;
