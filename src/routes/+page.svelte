@@ -75,7 +75,15 @@
   </p>
 
   {#if loading}
-    <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <div
+      style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      "
+    >
       <h3>Loading data...</h3>
       <img src="/laptop-specs/tangyload.gif" alt="Loading..." style="width: 100px; height: 100px;" />
     </div>

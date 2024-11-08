@@ -254,7 +254,7 @@
       if (svg && firstCellRect) {
         const svgRect = svg.getBoundingClientRect();
         const cellRect = firstCellRect.getBoundingClientRect();
-        cellOffsetTop = cellRect.top - svgRect.top;
+        cellOffsetTop = (cellRect.top - svgRect.top);
       }
     }
   
@@ -299,111 +299,132 @@
   
   </script>
   
-  <div style="display: flex; flex-direction: column; gap: 0px;">
-    <h3>Filter Options</h3>
-  
-    <!-- Clear Filters Button -->
+  <div style="
+  display: flex; 
+  align-items: center; 
+  padding: 10px 15px; 
+  gap: 20px; 
+  border-radius: 8px; 
+  max-width: 100%;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+">
+
+  <!-- Title and Clear Filters Button -->
+  <div style="display: flex; align-items: center; gap: 20px;">
+    <h3 style="margin: 0; font-size: 1.2em; color: #333;">Filter Options</h3>
     <button 
-    on:click={clearFilter} 
-    style="
-      margin-top: 0px;
-      margin-bottom: 15px; 
-      align-self: flex-start; 
-      padding: 0.5;
-      display: inline-flex;
-    "
+      on:click={clearFilter} 
+      style="
+        padding: 8px 12px; 
+        border: none; 
+        background-color: #007bff; 
+        color: white; 
+        border-radius: 5px; 
+        cursor: pointer;
+        font-size: 0.9em;
+      "
     >
       Clear Filters
     </button>
-  
-  <div style="display: flex; gap: 0px;">
-    <!-- OS Filter Dropdown -->
-    <details style="flex: 1; max-width: 200px;">
-      <summary style="cursor: pointer; font-weight: bold;">
-        Operating System
-      </summary>
-      <div style="margin-top: 10px; border: 1px solid #ddd; max-height: 150px; overflow-y: auto;">
-        {#each uniqueOpSys as opSys}
-          <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 5px;">
-            <input style="cursor: pointer;" type="checkbox" bind:group={$selectedOpSys} value={opSys} />
-            {opSys}
-          </label>
-        {/each}
-      </div>
-    </details>
-  
-    <!-- Company Filter Dropdown -->
-    <details style="flex: 1; max-width: 150px;">
-      <summary style="cursor: pointer; font-weight: bold;">
-        Company
-      </summary>
-      <div style="margin-top: 10px; border: 1px solid #ddd; max-height: 150px; overflow-y: auto;">
-        {#each uniqueCompanies as company}
-          <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 5px;">
-            <input style="cursor: pointer;" type="checkbox" bind:group={$selectedCompany} value={company} />
-            {company}
-          </label>
-        {/each}
-      </div>
-    </details>
-
-    <!-- Screen Resolution Filter Dropdown -->
-    <details style="flex: 1; max-width: 200px;">
-      <summary style="cursor: pointer; font-weight: bold;">
-        Screen Resolution
-      </summary>
-      <div style="margin-top: 10px; border: 1px solid #ddd; max-height: 150px; overflow-y: auto;">
-        {#each uniqueScreenResolutions as resolution}
-          <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 5px;">
-            <input style="cursor: pointer;" type="checkbox" bind:group={$selectedScreenResolution} value={resolution} />
-            {resolution}
-          </label>
-        {/each}
-      </div>
-    </details>
-  
-    <!-- GPU Filter Dropdown -->
-    <details style="flex: 1; max-width: 200px;">
-      <summary style="cursor: pointer; font-weight: bold;">
-        GPU Manufacturer
-      </summary>
-      <div style="margin-top: 10px; border: 1px solid #ddd; max-height: 150px; overflow-y: auto;">
-        {#each uniqueGPU as gpu}
-          <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 5px;">
-            <input style="cursor: pointer;" type="checkbox" bind:group={$selectedGPU} value={gpu} />
-            {gpu}
-          </label>
-        {/each}
-      </div>
-    </details>
-  
-  <!-- CPU Filter Dropdown -->
-    <details style="flex: 1; max-width: 200px;">
-      <summary style="cursor: pointer; font-weight: bold;">
-        CPU Manufacturer
-      </summary>
-      <div style="margin-top: 10px; border: 1px solid #ddd; max-height: 150px; overflow-y: auto;">
-        {#each uniqueCPU as cpu}
-          <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 5px;">
-            <input style="cursor: pointer;" type="checkbox" bind:group={$selectedCPU} value={cpu} />
-            {cpu}
-          </label>
-        {/each}
-      </div>
-    </details>
   </div>
+
+<!-- Filter Options -->
+<div style="display: flex; gap: 10px; flex-wrap: wrap; white-space: nowrap; justify-content: center; align-items: top; flex-grow: 1;">
+  
+  <!-- OS Filter Dropdown -->
+  <details style="flex: 1;">
+    <summary style="cursor: pointer; font-weight: bold;">
+      Operating System
+    </summary>
+    <div style="margin-top: 5px; background-color: #fff; border: 1px solid #ddd; max-height: 150px; overflow-y: auto;">
+      {#each uniqueOpSys as opSys}
+        <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 5px;">
+          <input style="cursor: pointer;" type="checkbox" bind:group={$selectedOpSys} value={opSys} />
+          {opSys}
+        </label>
+      {/each}
+    </div>
+  </details>
+
+  <!-- Company Filter Dropdown -->
+  <details style="flex: 1;">
+    <summary style="cursor: pointer; font-weight: bold;">
+      Company
+    </summary>
+    <div style="margin-top: 5px; background-color: #fff; border: 1px solid #ddd; max-height: 150px; overflow-y: auto;">
+      {#each uniqueCompanies as company}
+        <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 5px;">
+          <input style="cursor: pointer;" type="checkbox" bind:group={$selectedCompany} value={company} />
+          {company}
+        </label>
+      {/each}
+    </div>
+  </details>
+
+  <!-- Screen Resolution Filter Dropdown -->
+  <details style="flex: 1;">
+    <summary style="cursor: pointer; font-weight: bold;">
+      Screen Resolution
+    </summary>
+    <div style="margin-top: 5px; background-color: #fff; border: 1px solid #ddd; max-height: 150px; overflow-y: auto;">
+      {#each uniqueScreenResolutions as resolution}
+        <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 5px;">
+          <input style="cursor: pointer;" type="checkbox" bind:group={$selectedScreenResolution} value={resolution} />
+          {resolution}
+        </label>
+      {/each}
+    </div>
+  </details>
+
+  <!-- GPU Filter Dropdown -->
+  <details style="flex: 1;">
+    <summary style="cursor: pointer; font-weight: bold;">
+      GPU Manufacturer
+    </summary>
+    <div style="margin-top: 5px; background-color: #fff; border: 1px solid #ddd; max-height: 150px; overflow-y: auto;">
+      {#each uniqueGPU as gpu}
+        <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 5px;">
+          <input style="cursor: pointer;" type="checkbox" bind:group={$selectedGPU} value={gpu} />
+          {gpu}
+        </label>
+      {/each}
+    </div>
+  </details>
+
+  <!-- CPU Filter Dropdown -->
+  <details style="flex: 1;">
+    <summary style="cursor: pointer; font-weight: bold;">
+      CPU Manufacturer
+    </summary>
+    <div style="margin-top: 5px; background-color: #fff; border: 1px solid #ddd; max-height: 150px; overflow-y: auto;">
+      {#each uniqueCPU as cpu}
+        <label style="cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 5px;">
+          <input style="cursor: pointer;" type="checkbox" bind:group={$selectedCPU} value={cpu} />
+          {cpu}
+        </label>
+      {/each}
+    </div>
+  </details>
 </div>
+</div>
+
   
-  <div style="display: flex; align-items: flex-start;">
-    <svg bind:this={svg} style="flex-grow: 1; width: 100%; height: auto; display: block; margin-top: 20px" preserveAspectRatio="xMidYMid meet"></svg>
-  
+<div style="display: flex; align-items: flex-start;">
+  <svg 
+    bind:this={svg} 
+    style="flex-basis: 100%; height: auto; max-width: 100%; display: block; margin-top: 20px" 
+    preserveAspectRatio="xMidYMid meet">
+  </svg>
+
     <div style="
       width: 250px;
       max-height: 400px;
       overflow-y: auto;
       padding: 15px;
       margin-left: -5px;
-      margin-right: 5px;
       margin-top: {cellOffsetTop}px;
       background-color: #f9f9f9;
       border: 1px solid #ddd;
@@ -443,5 +464,10 @@
   </div>
   
   <style>
+    details summary {
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
   
