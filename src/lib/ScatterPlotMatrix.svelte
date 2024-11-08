@@ -474,7 +474,7 @@
     <!-- Selected Product Details Box -->
     <div style="
       max-height: 400px;
-      width: auto;
+      width: 250px;
       padding: 10px;
       border-radius: 8px;
       background-color: #f9f9f9;
