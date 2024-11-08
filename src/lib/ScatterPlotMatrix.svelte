@@ -441,7 +441,7 @@
       border-radius: 8px;
       background-color: #ffffff;
       border: 1px solid #ddd;
-      font-size: 0.5em;
+      font-size: 0.7em;
       color: #444;
     ">
       <!-- Legend Title -->
