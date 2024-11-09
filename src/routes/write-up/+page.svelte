@@ -15,6 +15,9 @@
         <em>"How do different laptop specifications relate to one another, and how might these features collectively influence price and performance?"</em> 
         By using a Scatterplot Matrix (SPLOM), users can simultaneously explore various features, such as RAM, storage types, screen size, and price, and investigate potential correlations across these dimensions. The SPLOM layout provides a comprehensive view, supporting the analysis of multi-variable relationships and offering insights into which specifications might impact laptop price.
       </p>
+
+      <h3><strong>Data Source</strong></h3>
+      <p>This project uses the <em>Laptop Prices</em> dataset from Kaggle, a refined version of the original dataset with laptop specifications and prices. <a href="https://www.kaggle.com/datasets/owm4096/laptop-prices" target="_blank">Link to dataset</a>.</p>  
         
       <h3><strong>Design Rationale</strong></h3>
       <p>For visual encoding, I chose color to represent Company, as it’s the most general and succinct way to categorize laptops. When people describe their laptops, they typically refer to the company first, making this encoding intuitive for users to identify brand-related patterns quickly. The SPLOM itself was selected to present all relationships simultaneously, as linked brushing across scatterplots enables users to highlight selected points across the matrix. This linked interaction helps users identify patterns across multiple specs, answering the compelling question of how features interrelate.</p>
